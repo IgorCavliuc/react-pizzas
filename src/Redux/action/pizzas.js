@@ -6,13 +6,15 @@ export const setLoaded = (payload) => ({
 export const fetchPizzas = (sortBy, category) => (dispatch) => {
   dispatch(setLoaded(false));
   fetch(
-    `/pizzas?${category !== null ? `category=${category}` : ""
+    `http://localhost:3001/pizzas?${
+      category !== null ? `category=${category}` : ""
     }&_sort=${sortBy.type}&_order=${sortBy.order}`
   )
-    .then((resp) => resp.json())
-    .then((json) => {
-      dispatch(setPizzas(json));
-    });
+  .then((response) => response.json())
+  .then((data) => 
+  dispatch(setPizzas(data)
+  ));
+    
 };
 
 export const setPizzas = (items) => ({
